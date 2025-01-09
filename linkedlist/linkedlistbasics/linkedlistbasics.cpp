@@ -86,7 +86,61 @@ delete temptail;
 tail=temp;
 }
 }
-
+int count()
+{
+    int count=0;
+    if(head==NULL)
+    return 0;
+    node* temp=head;
+    while (temp!=NULL)
+    {
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+void insertmiddle(int pos,int val)
+{
+    if(pos>(count()))
+    {
+        cout<<"Inavlid Position"<<endl;
+        return;
+    }
+    if(pos<0)
+    {
+        cout<<"invalid POsition!"<<endl;
+        return;
+    }
+    if(pos==0)
+    {
+        push_front(val);
+        return;
+    }
+    node* temp=head;
+    for(int i=0;i<pos-1;i++)
+    {
+        temp=temp->next;
+    }
+    node *newnode=new node(val);
+    newnode->next=temp->next;
+    temp->next=newnode;
+    return;
+}
+int search(int val)
+{
+    node *temp=head;
+    int index=0;
+    while (temp!=NULL)
+    {
+        if(val==temp->data)
+        {
+            return index; 
+        }
+        index++;
+        temp=temp->next;
+    }
+    return -1;    
+}
 void print()
 {
     node* start=head;
@@ -95,7 +149,7 @@ void print()
         cout<<start->data<<" -> ";
         start=start->next;
     }
-    cout<<"NULL";
+    cout<<"NULL"<<endl;
 }
 
 };
@@ -119,6 +173,12 @@ ll.pop_back();
 cout<<endl;
 cout<<"print Again"<<endl;
 ll.print();
-cout<<"Test add to check git repo attch!";
+int middlepos=4;
+ll.insertmiddle(middlepos,2);
+cout<<"Print fater insert in middle position: "<<middlepos<<endl;
+ll.print();
+int searchval=5;
+cout<<"search value :"<<searchval<<endl;
+cout<<"index : "<<ll.search(searchval)<<endl;
 return 0;
 }
