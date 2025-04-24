@@ -19,6 +19,7 @@
 
 #include<iostream>
 #include<vector>
+#include<algorithm>
 using namespace std;
 class threeGreatCandidates
 {
@@ -29,29 +30,34 @@ int getthreeGreatCandidates(vector<int> arr)
 {
 if(arr.size()<=3)
 return -1;
-int ans=1;
-for (int i = 0; i < 3; i++)
-{
-int maxNum=arr[0];
-int index=0;
-for (int j = 0; j < arr.size(); j++)
-{
-if(arr[j]>maxNum)
-{
-maxNum=arr[j];
-index=j;
-}
-}
-ans*=arr[index];
-arr[index]=0;
-}
-return ans;
+sort(arr.begin(),arr.end());
+// optimal solution
+int size=arr.size();
+return arr[size-1]*arr[size-2]*arr[size-3];
+// general solution
+// int ans=1;
+// for (int i = 0; i < 3; i++)
+// {
+// int maxNum=arr[0];
+// int index=0;
+// for (int j = 0; j < arr.size(); j++)
+// {
+// if(arr[j]>maxNum)
+// {
+// maxNum=arr[j];
+// index=j;
+// }
+// }
+// ans*=arr[index];
+// arr[index]=0;
+// }
+// return ans;
 }
 };
 int main ()
 {
     threeGreatCandidates inst;
-    vector<int> arr = {10, 3, 5, 6, 20};
+    vector<int> arr = {-10, -3, -5, -6, -20};
     cout <<"max product is: "<< inst.getthreeGreatCandidates(arr) << endl;
     return 0;
 }
